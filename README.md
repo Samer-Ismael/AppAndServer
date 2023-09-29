@@ -71,17 +71,10 @@ Your Kafka Chat Server should now be up and running, ready to handle JSON messag
 
 ## Usage
 
-1. **Clone the Chat App:**
-   - Clone the Chat App repository from GitHub to your local machine:
-
-     ```shell
-     git clone https://github.com/Samer-Ismael/ChatApp.git
-     ```
-
-2. **Start the Chat App:**
+1. **Start the Chat App:**
    - Launch the Chat App on your local machine.
 
-3. **Test the Chat App:**
+2. **Test the Chat App:**
    - To test the Chat App functionality, you can use the following steps:
       - Open your preferred IDE, such as IntelliJ IDEA.
       - Look for options beside the start button and you will find three user profiles.
@@ -105,4 +98,4 @@ This project is licensed under the [MIT License](https://choosealicense.com/lice
 
 ## Diagram
 ![Class_Diagram](Diagram%20and%20rapport%2FServer.png)
-
+![ChatApp1.png](Diagram%20and%20rapport%2FChatApp1.png)
