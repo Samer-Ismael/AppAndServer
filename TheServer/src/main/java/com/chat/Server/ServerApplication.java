@@ -1,6 +1,4 @@
 package com.chat.Server;
-
-
 import com.chat.Server.server.ServerStart;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,8 +14,6 @@ public class ServerApplication {
 		ServerStart server = new ServerStart(serverPath);
 		SpringApplication.run(ServerApplication.class, args);
 		//server.serverStop(serverPath);
-
-
 
 	}
 }

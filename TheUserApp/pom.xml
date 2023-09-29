@@ -13,7 +13,7 @@
         <maven.compiler.target>20</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
+    <packaging>jar</packaging>
     <dependencies>
         <dependency>
             <groupId>org.apache.kafka</groupId>
@@ -67,10 +67,6 @@
             <version>5.5.0</version>
             <scope>test</scope>
         </dependency>
-
-
-
-
     </dependencies>
 
 </project>
