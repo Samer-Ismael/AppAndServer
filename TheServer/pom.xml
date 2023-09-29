@@ -90,6 +90,7 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- Hänvisning till andra module för att kunna använda klasser via import -->
 		<dependency>
 			<groupId>org.example</groupId>
 			<artifactId>ChatApp</artifactId>
