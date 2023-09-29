@@ -97,5 +97,9 @@ Collaborators:
 This project is licensed under the [MIT License](https://choosealicense.com/licenses/mit/).
 
 ## Diagram
+## Server
+
 ![Class_Diagram](Diagram%20and%20rapport%2FServer.png)
+## User App
+
 ![ChatApp1.png](Diagram%20and%20rapport%2FChatApp1.png)
