@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="org.example.GUI.ChatGUI">
+  <grid id="27dc6" binding="Chat" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="5" left="5" bottom="5" right="5"/>
+    <constraints>
+      <xy x="20" y="20" width="446" height="766"/>
+    </constraints>
+    <properties>
+      <background color="-16580066"/>
+      <font name="JetBrains Mono" size="16"/>
+    </properties>
+    <clientProperties>
+      <html.disable class="java.lang.Boolean" value="false"/>
+    </clientProperties>
+    <border type="none"/>
+    <children>
+      <component id="62a79" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="5"/>
+          </grid>
+        </constraints>
+        <properties>
+          <dragEnabled value="true"/>
+          <focusCycleRoot value="true"/>
+          <font name="JetBrains Mono" size="24" style="1"/>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="39e42" class="javax.swing.JTextPane" binding="textPane1" default-binding="true">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <minimum-size width="400" height="500"/>
+            <preferred-size width="150" height="50"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-16239568"/>
+          <caretColor color="-16239568"/>
+          <dragEnabled value="true"/>
+          <font name="Dialog" size="18" style="1"/>
+          <foreground color="-328449"/>
+          <inheritsPopupMenu value="false"/>
+          <margin top="6" left="6" bottom="6" right="6"/>
+          <selectedTextColor color="-16239568"/>
+          <text value=""/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>
