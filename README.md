@@ -41,6 +41,8 @@ Before setting up the Kafka Chat Server, ensure you have installed the following
 
 ## Installation
 
+### Option 1: Manual Installation
+
 To install and run the Kafka Chat Server, follow these steps:
 
 **Note:** You need to have Java installed on your system to be able to run the server. 
@@ -66,8 +68,24 @@ If you don't have it, you can download it from
 5. **Start the Server:**
     - Start the Kafka Chat Server application.
 
-Your Kafka Chat Server should now be up and running, ready to handle JSON messages and interact with your MySQL database.
+### Option 2: Docker Installation
 
+If you prefer a containerized setup, you can use Docker to simplify the installation process.
+Make sure you have Docker installed on your system. You can confirm this by running `docker version` in your terminal.
+
+1. **Clone the repository:**
+    - Clone the repository on your machine and run `docker-compose up -d` in the terminal.
+    - Wait until all the services are up and running.
+    - Enter the Docker Desktop app and make sure that all services are running.
+    - If you find any service stopped, click on the start button to start the service.
+
+2. **Run the User App:**
+    - Start the app, and you should be good to go.
+
+The Kafka Chat Server will now be running in a Docker container.
+- You can access the server at `http://localhost:8080` from your web browser.
+- You can access the database on `localhost:3307`. If you have another database server running on port 3306, you can leave it as is.
+- Kafka server will be running on `localhost:9092`. If you have another server running on this port, you may need to close it!
 
 ## Usage
 
