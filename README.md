@@ -13,6 +13,8 @@ This README provides an overview of the server, its functionalities, and instruc
 1. [Introduction](#introduction)
 2. [Prerequisites](#prerequisites)
 3. [Installation](#installation)
+    - [Option 1: Manual Installation](#option-1-manual-installation)
+    - [Option 2: Docker Installation](#option-2-docker-installation)
 4. [Usage](#usage)
 5. [Credits](#Credits)
 6. [License](#license)
