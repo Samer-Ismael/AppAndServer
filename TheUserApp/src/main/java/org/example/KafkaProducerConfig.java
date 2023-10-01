@@ -1,6 +1,7 @@
 package org.example;
 
 import lombok.Getter;
+import org.springframework.kafka.core.KafkaTemplate;
 
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -64,7 +65,6 @@ public class KafkaProducerConfig {
             try (OutputStream os = con.getOutputStream()) {
                 os.write(jsonPayload.getBytes(StandardCharsets.UTF_8));
             }
-
             int responseCode = con.getResponseCode();
 
             // fancy if else
