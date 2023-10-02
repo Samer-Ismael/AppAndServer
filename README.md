@@ -82,7 +82,18 @@ Make sure you have Docker installed on your system. You can confirm this by runn
     - If you find any service stopped, click on the start button to start the service.
 
 2. **Run the User App:**
-    - Start the app, and you should be good to go.
+    - Open a new terminal window.
+   - Navigate to the directory where you have the ChatApp.jar file.
+   - Run the following command to start the Chat Application:
+
+     ```bash
+     javaw -jar ChatApp.jar
+     ```
+
+   - The Chat Application should start, and you'll be prompted to enter your username.
+   - Enter your desired username, and you'll be connected to the chat.
+   - You can repeat the above steps to start multiple instances of the chat application with different usernames.
+
 
 The Kafka Chat Server will now be running in a Docker container.
 - You can access the server at `http://localhost:8080` from your web browser.
