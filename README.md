@@ -106,7 +106,7 @@ The Kafka Chat Server will now be running in a Docker container.
 - You can access the database on `localhost:3307`. If you have another database server running you can leave it on, because it will be on 3306.
 - Kafka server will be running on `localhost:9092`. If you have another server running on this port, you may need to close it!
 
-## Usage
+## Usage only for Manual Installation
 
 1. **Start the Chat App:**
    - Launch the Chat App on your local machine.
