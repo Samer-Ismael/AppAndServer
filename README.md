@@ -76,10 +76,17 @@ If you prefer a containerized setup, you can use Docker to simplify the installa
 Make sure you have Docker installed on your system. You can confirm this by running `docker version` in your terminal.
 
 1. **Clone the repository:**
-    - Clone the repository on your machine and run `docker-compose up -d` in the terminal.
-    - Wait until all the services are up and running.
-    - Enter the Docker Desktop app and make sure that all services are running.
-    - If you find any service stopped, click on the start button to start the service.
+    - Clone the repository to your local machine.
+   - Open a terminal window and navigate to the project directory.
+   - Run the following command to start the Docker services:
+
+     ```bash
+     docker-compose up -d
+     ```
+
+   - Wait for all the services to start.
+   - Check the Docker Desktop application to ensure that all services are running. If any service is stopped, click the start button to start it.
+
 
 2. **Run the User App:**
     - Open a new terminal window.
