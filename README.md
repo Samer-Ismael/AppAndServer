@@ -102,7 +102,7 @@ Make sure you have Docker installed on your system. You can confirm this by runn
 
 
 The Kafka Chat Server will now be running in a Docker container.
-- You can access the server at `[http://localhost:8080](http://localhost:8080/chat/room/send)` to send json message from psotman.
+- You can access the server at `http://localhost:8080/chat/room/send` to send json message from psotman.
 - You can access the database on `localhost:3307`. If you have another database server running on port 3306, you can leave it on.
 - Kafka server will be running on `localhost:9092`. If you have another server running on this port, you may need to close it!
 
