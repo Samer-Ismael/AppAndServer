@@ -76,7 +76,7 @@ If you prefer a containerized setup, you can use Docker to simplify the installa
 Make sure you have Docker installed on your system. You can confirm this by running `docker version` in your terminal.
 
 1. **Clone the repository:**
-    - You can clone the repository to your local machine. Alternatively, you can download the docker-compose.yml and ChatApp.jar files without cloning.
+    - You can clone the repository to your local machine. Alternatively, you can download the 'docker-compose.yml' and 'ChatApp.jar' files without cloning.
     - Open a terminal window and navigate to the project directory or the folder where you have the downloaded files.
     - Run the following command to start the Docker services:
 
