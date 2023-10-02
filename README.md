@@ -89,8 +89,7 @@ Make sure you have Docker installed on your system. You can confirm this by runn
 
 
 2. **Run the User App:**
-    - Open a new terminal window.
-   - Navigate to the directory where you have the ChatApp.jar file.
+   - Open a new terminal window, or in the same one because the server is running in detached mood.
    - Run the following command to start the Chat Application:
 
      ```bash
