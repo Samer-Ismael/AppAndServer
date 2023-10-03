@@ -1,6 +1,5 @@
 package com.chat.Server;
 import com.chat.Server.server.ServerStart;
-import org.example.GUI.ChatGUI;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
