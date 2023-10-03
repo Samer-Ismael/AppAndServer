@@ -101,9 +101,22 @@ Make sure you have Docker installed on your system. You can confirm this by runn
    - You can repeat the above steps to start multiple instances of the chat application with different usernames.
 
 
-The Kafka Chat Server will now be running in a Docker container.
-- You can access the server at `http://localhost:8080/chat/room/send` to send json message from psotman.
-- You can access the database on `localhost:3307`. If you have another database server running you can leave it on, because it will be on 3306.
+The Kafka Chat Server is now running in a Docker container. You can interact with it as follows:
+
+- Access the server at `http://localhost:8080/chat/room/send` to send JSON messages via tools like Postman.
+- Access the database at `localhost:3307` with the following credentials:
+  - Username: `admin`
+  - Password: `root`
+  - If you already have another database server running on port 3306, there's no need to worry; they can coexist. However, if you're feeling **savage** and wish to access this MySQL instance via the terminal, you can do so with these commands:
+    - Open a terminal and execute the following commands:
+      - `docker exec -it mysql bash` to access the MySQL container.
+      - `mysql -u admin -proot dockerdatabase` to log in to the MySQL server within the container.
+      - Once inside the MySQL command-line interface, you can manage the databases. For example:
+        - `SHOW DATABASES;` to list the available databases.
+        - `USE dockerdatabase;` to select the `dockerdatabase`.
+        - You can then run SQL queries, such as `SELECT * FROM messages;`, to interact with the data.
+      - Alternatively, you can use your preferred GUI tool to manage the database if you prefer a graphical interface.
+
 - Kafka server will be running on `localhost:9092`. If you have another server running on this port, you may need to close it!
 
 ## Usage only for Manual Installation
