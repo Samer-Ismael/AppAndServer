@@ -9,6 +9,8 @@ Projektet är en Kafka-serverapplikation som är integrerad med en MySQL-databas
 
 Jag valde att utveckla en chattapplikation där användare kan ange sina namn och börja kommunicera med andra aktiva användare i chatten. Användarapplikationen har en enkel grafisk användargränssnitt (GUI).
 
+Alla tester körs automatiskt via GitHub Actions. 
+
 ## Vad har du gjort
 
 För att implementera funktionaliteten i min applikation använde jag en enkel och effektiv metod. Jag skapade en "producer" som är ansvarig för att skapa och skicka Message-objekt till en Kafka-topic. Samtidigt lagras dessa meddelanden i en MySQL-databas för senare åtkomst och hantering.
