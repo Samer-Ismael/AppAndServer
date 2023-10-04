@@ -1,5 +1,7 @@
 package org.example;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
@@ -14,6 +16,18 @@ public class Message {
     private String body;
 
     // normal Class that has more variables than the app needs, maybe for future updates.
+
+    @JsonCreator
+    public Message(@JsonProperty("id") int id,
+                   @JsonProperty("sender") String sender,
+                   @JsonProperty("receiver") String receiver,
+                   @JsonProperty("body") String body) {
+        this.id = id;
+        this.sender = sender;
+        this.receiver = receiver;
+        this.body = body;
+    }
+
     public Message(String sender, String receiver, String body) {
         this.sender = sender;
         this.receiver = receiver;

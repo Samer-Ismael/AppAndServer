@@ -1,19 +1,7 @@
 package org.example;
 
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
 class KafkaProducerConfigTest {
 
     @Test
@@ -30,7 +18,8 @@ class KafkaProducerConfigTest {
             String response = obj.sendMessage(testMessage);
 
             // Add assertions to verify the response
-            // For example, check if the response contains a success message
+            // For example, check if the response contains "sent",
+            // because I have an if statement that will say sent if the respons code is 200
             assertTrue(response.contains("Sent"));
         });
     }

@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.Properties;
 
 public class KafkaMessageConsumer {
-    Consumer<String, String> consumer;
+    Consumer<String, Message> consumer;
     private final JTextPane textPane;
 
     public KafkaMessageConsumer(String bootstrapServers, String groupId, String topic, JTextPane textPane) {
@@ -20,8 +20,10 @@ public class KafkaMessageConsumer {
         Properties properties = new Properties();
         properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         properties.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
-        properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
-        properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+        properties.put("key.deserializer", StringDeserializer.class.getName());
+        properties.put("value.deserializer", MessageDeserializer.class.getName());
+        //The only wa to make it read from the topic as object is to create a custom deserializer.
+        // I markt the Message Entity class as the object im trying to deserialize and not it works.
 
         // Create a KafkaConsumer instance with the properties.
         consumer = new KafkaConsumer<>(properties);
@@ -37,12 +39,14 @@ public class KafkaMessageConsumer {
                 // In this case, it's set to 100 milliseconds.
                 // This means that the poll method will block for up to 100 milliseconds to wait for new messages.
                 // If no messages arrive during this time, it will return an empty set of records.
-                ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
+                ConsumerRecords<String, Message> records = consumer.poll(Duration.ofMillis(100));
 
-                for (ConsumerRecord<String, String> record : records) {
-                    String message = record.value();
-                    Message message1 = Message.fromJsonString(message);
+                for (ConsumerRecord<String, Message> record : records) {
 
+                    Message message1 = record.value();
+                    System.out.println("Sender: " + message1.getSender());
+                    System.out.println("Receiver: " + message1.getReceiver());
+                    System.out.println("body: " + message1.getBody());
                     SwingUtilities.invokeLater(() -> {
                         textPane.setText(textPane.getText() + "\n" + message1.showMessage());
                     });
