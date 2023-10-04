@@ -23,7 +23,9 @@ public class KafkaMessageConsumer {
         properties.put("key.deserializer", StringDeserializer.class.getName());
         properties.put("value.deserializer", MessageDeserializer.class.getName());
         //The only wa to make it read from the topic as object is to create a custom deserializer.
-        // I marked the Message Entity class as the object I'm trying to deserialize and not it works
+        // I marked the Message Entity class as the object I'm trying to deserialize and now it works.
+        // That's why programing is awesome when things don't work. we create new thing that works.
+        //Hoppas det blir godkänd
 
         // Create a KafkaConsumer instance with the properties.
         consumer = new KafkaConsumer<>(properties);
