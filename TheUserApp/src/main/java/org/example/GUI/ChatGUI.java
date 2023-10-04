@@ -22,7 +22,7 @@ public class ChatGUI {
         this.menu = new KafkaProducerConfig();
         String userName = JOptionPane.showInputDialog(Chat, "Enter your username:");
         menu.setUserName(userName);
-
+        menu.sendFromGUI( menu.getUserName()+ " Entered the chat!", "System: ");
         textField1.requestFocusInWindow();
 
 
@@ -37,6 +37,8 @@ public class ChatGUI {
 
                 // Start consuming messages
                 messageConsumer.consumeMessages();
+
+
 
                 return null;
             }
@@ -63,6 +65,7 @@ public class ChatGUI {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     String message = textField1.getText();
                     if (message.equalsIgnoreCase("clear")) textPane1.setText("");
+                    else if (message.equalsIgnoreCase("exit")) System.exit(0);
                     else menu.sendFromGUI(message, menu.getUserName());
                     textField1.setText("");
                 }

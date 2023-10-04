@@ -1,11 +1,17 @@
 package org.example;
 
+import com.fasterxml.jackson.databind.ser.std.StringSerializer;
 import lombok.Getter;
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.Producer;
+import org.apache.kafka.clients.producer.ProducerConfig;
+import org.apache.kafka.clients.producer.ProducerRecord;
 
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.Properties;
 import java.util.Scanner;
 
 public class KafkaProducerConfig {
@@ -77,6 +83,24 @@ public class KafkaProducerConfig {
 
         return null;
     }
+    private void broadcastNotification(String notification) {
+        // Define a new Kafka producer configuration
+        Properties producerProperties = new Properties();
+        producerProperties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        producerProperties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        producerProperties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+
+        // Create a Kafka producer
+        try (Producer<String, String> producer = new KafkaProducer<>(producerProperties)) {
+            // Publish the notification message to a shared Kafka topic
+            ProducerRecord<String, String> record = new ProducerRecord<>("general", notification);
+            producer.send(record);
+        } catch (Exception e) {
+            // Handle any exceptions that may occur during publishing
+            e.printStackTrace();
+        }
+    }
+
     //Accepts the message body and userName as parameters, constructs a `Message` object, and sends
     //it to the chat room.
     public void sendFromGUI (String body, String userName){

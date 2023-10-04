@@ -31,6 +31,7 @@ public class KafkaMessageConsumer {
         consumer = new KafkaConsumer<>(properties);
         // Subscribe the consumer to the specified Kafka topic.
         consumer.subscribe(Collections.singleton(topic));
+
     }
 
     public void consumeMessages() {
@@ -46,12 +47,8 @@ public class KafkaMessageConsumer {
                 for (ConsumerRecord<String, Message> record : records) {
 
                     Message message1 = record.value();
-                    System.out.println("Sender: " + message1.getSender());
-                    System.out.println("Receiver: " + message1.getReceiver());
-                    System.out.println("body: " + message1.getBody());
-                    SwingUtilities.invokeLater(() -> {
-                        textPane.setText(textPane.getText() + "\n" + message1.showMessage());
-                    });
+
+                    appendToChat(message1.showMessage());
                 }
             }
         } catch (Exception e) {
@@ -60,6 +57,12 @@ public class KafkaMessageConsumer {
             // Ensure that the Kafka consumer is always closed even in case of exceptions.
             consumer.close();
         }
+    }
+    private void appendToChat(String message) {
+        SwingUtilities.invokeLater(() -> {
+            // Append the message to the JTextPane
+            textPane.setText(textPane.getText() + message + "\n");
+        });
     }
 
     //Close the thing :)
