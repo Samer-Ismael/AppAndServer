@@ -19,9 +19,11 @@ För att säkerställa att Kafka-miljön är korrekt konfigurerad och startad n�
 
 I den andra delen av applikationen, som är tillgänglig för användarna, implementerade jag möjligheten för användare att ange sina namn. När användaren anger sitt namn, initieras en "producer" och en "consumer".
 
+För att kunna hämta informationen från min topic som ett objekt så behöver man använda JsonDeserializer, men ibland kan den inte hantera den klassen som jag har som Entity-klass i det scenariot som jag vill ha den för den specifika appen som jag försöker skapa. Eftersom jag inte vill ändra i min Entity-klass och inte heller vill ändra i min app, behövde jag skapa en anpassad deserializer som fungerar med den klassen jag arbetar med för att lösa problemet.
+
 - "Producer" är ansvarig för att skapa och skicka meddelanden till Kafka-topic. Varje användare har sin egen "producer" för att möjliggöra att de kan skicka meddelanden till andra användare.
 
-- "Consumer" är ansvarig för att lyssna på Kafka-topic och ta emot meddelanden. Eftersom det inte är möjligt för två "consumers" som tillhör samma grupp att lyssna på samma topic, utvecklade jag en specialfunktion som genererar en unik och slumpmässig grupp-id för varje ny användare. Detta säkerställer att alla användare kan kommunicera och se de meddelanden som andra skickar.
+- "Consumer" är ansvarig för att lyssna på Kafka-topic och ta emot meddelanden. Eftersom det inte är möjligt för två "consumers" som tillhör samma grupp att lyssna på samma topic, utvecklade jag en specialfunktion som genererar en unik och slumpmässig grupp-id för varje ny användare. Detta säkerställer att alla användare kan kommunicera och se de meddelanden som andra skickar. För varje ny consumer skickas ett meddelande från en annan consumer som kallas "System" till samma topic för att informera alla om att en person har anslutit sig till chatten.
 
 För att spara och hantera meddelandena i applikationen använder jag en MySQL-databas. Denna databas innehåller en särskild tabell där varje meddelande är lagrat som en rad. Tabellen har flera kolumner, inklusive ett automatiskt ökande ID för varje meddelande, mottagarens namn, avsändarens namn och själva meddelandet. Genom att använda en strukturerad databas kan vi effektivt organisera och hämta meddelanden baserat på olika kriterier.
 
