@@ -1,7 +1,6 @@
 package org.example;
 
 import lombok.Getter;
-import org.springframework.kafka.core.KafkaTemplate;
 
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -48,7 +47,7 @@ public class KafkaProducerConfig {
 
     // It should send a post request to the URL with a JSON payload containing a
     // `Message` object. and return if it was ok or not
-    public void sendMessage(Message message) {
+    public String sendMessage(Message message) {
         try {
             String url = "http://localhost:8080/chat/room/send";
             URL obj = new URL(url);
@@ -70,13 +69,13 @@ public class KafkaProducerConfig {
             // fancy if else
             String respons = (responseCode == 200 ? ("Sent " + userName) : "Somthing went wrogn " + responseCode);
             System.out.println(respons);
-
-
             con.disconnect();
+            return respons;
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        return null;
     }
     //Accepts the message body and userName as parameters, constructs a `Message` object, and sends
     //it to the chat room.
