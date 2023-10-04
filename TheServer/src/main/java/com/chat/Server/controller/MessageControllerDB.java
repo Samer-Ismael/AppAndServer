@@ -44,4 +44,16 @@ public class MessageControllerDB {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+    @GetMapping("/messages")
+    public ResponseEntity<List<Message>> getMessagesBySender(@RequestParam("sender") String senderName) {
+        try {
+            List<Message> messages = service.getMessagesBySender(senderName);
+            return ResponseEntity.ok(messages);
+        } catch (Exception e) {
+            // Log the exception
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
 }

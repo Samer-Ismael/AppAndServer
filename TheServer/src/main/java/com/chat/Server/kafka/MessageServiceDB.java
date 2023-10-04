@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 //The `MessageServiceDB` class is a service component responsible for managing
 //message data in the application. It interacts with the database through
 //the `MessageRepository` to perform operations such as saving, getting, and deleting messages.
@@ -35,6 +38,16 @@ public class MessageServiceDB {
         }
     }
 
+    public List<Message> getMessagesBySender(String senderName) {
+        try {
+            List<Message> messages = repository.findBySender(senderName);
+            return messages;
+        } catch (Exception e) {
+            // Log or print the exception for debugging
+            e.printStackTrace();
+            throw e; // Rethrow the exception if necessary
+        }
+    }
     public void deleteAllMessages() {
         try {
             repository.deleteAll();

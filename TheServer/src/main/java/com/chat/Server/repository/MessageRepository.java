@@ -18,4 +18,6 @@ import java.util.Optional;
 @Repository
 public interface MessageRepository extends JpaRepository<Message, Long> {
 
+    List<Message> findBySender(String senderName);
+
 }
