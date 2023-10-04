@@ -1,5 +1,6 @@
 package com.chat.Server.kafkaTest;
 
+import com.chat.Server.controller.MessageControllerDB;
 import com.chat.Server.kafka.MessageServiceDB;
 import com.chat.Server.payload.Message;
 import com.chat.Server.repository.MessageRepository;
@@ -8,14 +9,21 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class MessageServiceDBTest {
+    private final MessageServiceDB service = mock(MessageServiceDB.class);
+    private final MessageControllerDB messageControllerDB = new MessageControllerDB(service, null);
+
     @Mock
     private KafkaTemplate<String, Message> kafkaTemplate;
     @Mock
@@ -54,22 +62,35 @@ class MessageServiceDBTest {
     //getBySenderName tests the `getBySenderName` method by mocking the behavior of the `messageRepository`
     //for retrieving a message by sender name.
     @Test
-    void getBySenderName() {
-        String senderName = "Alice";
+    void testGetMessagesBySender() {
+        // Arrange
+        String senderName = "testSender";
+        List<Message> expectedMessages = new ArrayList<>(); // Create a list of messages here
 
-        Message expectedMessage = new Message();
-        expectedMessage.setId(2L);
-        expectedMessage.setBody("Hi there!");
-        expectedMessage.setSender(senderName);
-        when(messageRepository.findBySender(senderName)).thenReturn((List<Message>) expectedMessage);
+        when(service.getMessagesBySender(senderName)).thenReturn(expectedMessages);
 
-        Message retrievedMessage = messageServiceDB.getBySenderName(senderName);
+        // Act
+        ResponseEntity<List<Message>> response = messageControllerDB.getMessagesBySender(senderName);
 
-        // Assertions
-        assertNotNull(retrievedMessage);
-        assertEquals(2L, retrievedMessage.getId());
-        assertEquals("Hi there!", retrievedMessage.getBody());
-        assertEquals(senderName, retrievedMessage.getSender());
+        // Assert
+        verify(service, times(1)).getMessagesBySender(senderName);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(expectedMessages, response.getBody());
+    }
+    @Test
+    void testGetMessagesBySenderWithError() {
+        // Arrange
+        String senderName = "testSender";
+
+        when(service.getMessagesBySender(senderName)).thenThrow(new RuntimeException("Database error"));
+
+        // Act
+        ResponseEntity<List<Message>> response = messageControllerDB.getMessagesBySender(senderName);
+
+        // Assert
+        verify(service, times(1)).getMessagesBySender(senderName);
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+        assertNull(response.getBody());
     }
 
 

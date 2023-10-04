@@ -12,6 +12,8 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.mockito.Mockito.when;
@@ -80,116 +82,55 @@ class MessageControllerDBTest {
         assertSame(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
 
-    //testFindByReceiver tests the `findByReceiver` method by mocking the behavior of the `service`
-    // to return an expected message.
-    @Test
-    void testFindByReceiver() {
-        // Arrange
-        String receiver = "testReceiver";
-        Message expectedMessage = new Message();
-
-        when(service.getByReceiverName(receiver)).thenReturn(expectedMessage);
-
-        // Act
-        ResponseEntity<Message> response = messageControllerDB.findByReceiver(receiver);
-
-        // Assert
-        verify(service, times(1)).getByReceiverName(receiver);
-        assertSame(HttpStatus.OK, response.getStatusCode());
-        assertSame(expectedMessage, response.getBody());
-    }
-
-    //testFindByReceiverNotFound
-    // it will test `findByReceiver` method when the requested receiver is not found.
-
-    @Test
-    void testFindByReceiverNotFound() {
-        // Arrange
-        String receiver = "nonExistentReceiver";
-
-        when(service.getByReceiverName(receiver)).thenReturn(null);
-
-        // Act
-        ResponseEntity<Message> response = messageControllerDB.findByReceiver(receiver);
-
-        // Assert
-        verify(service, times(1)).getByReceiverName(receiver);
-        assertSame(HttpStatus.NOT_FOUND, response.getStatusCode());
-        assertNull(response.getBody());
-    }
-
-    //testFindByReceiverWithError
-    // it will test `findByReceiver` method when an error occurs during the database operation.
-
-    @Test
-    void testFindByReceiverWithError() {
-        // Arrange
-        String receiver = "testReceiver";
-
-        when(service.getByReceiverName(receiver)).thenThrow(new RuntimeException("Database error"));
-
-        // Act
-        ResponseEntity<Message> response = messageControllerDB.findByReceiver(receiver);
-
-        // Assert
-        verify(service, times(1)).getByReceiverName(receiver);
-        assertSame(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
-        assertNull(response.getBody());
-    }
-
     //testFindBySender
     // it will test `findBySender` method by mocking the behavior of the `service` to return an expected message.
 
     @Test
-    void testFindBySender() {
+    void testGetMessagesBySender() {
         // Arrange
-        String sender = "testSender";
-        Message expectedMessage = new Message();
+        String senderName = "testSender";
+        List<Message> expectedMessages = new ArrayList<>(); // Create a list of messages here
 
-        when(service.getBySenderName(sender)).thenReturn(expectedMessage);
+        when(service.getMessagesBySender(senderName)).thenReturn(expectedMessages);
 
         // Act
-        ResponseEntity<List<Message>> response = messageControllerDB.findBySender(sender);
+        ResponseEntity<List<Message>> response = messageControllerDB.getMessagesBySender(senderName);
 
         // Assert
-        verify(service, times(1)).getBySenderName(sender);
-        assertSame(HttpStatus.OK, response.getStatusCode());
-        assertSame(expectedMessage, response.getBody());
+        verify(service, times(1)).getMessagesBySender(senderName);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(expectedMessages, response.getBody());
     }
 
-    //testFindBySenderNotFound
-    // it will test `findBySender` method when the requested sender is not found.
     @Test
-    void testFindBySenderNotFound() {
+    void testGetMessagesBySenderNotFound() {
         // Arrange
-        String sender = "nonExistentSender";
+        String senderName = "nonExistentSender";
 
-        when(service.getBySenderName(sender)).thenReturn(null);
+        when(service.getMessagesBySender(senderName)).thenReturn(Collections.emptyList());
 
         // Act
-        ResponseEntity<List<Message>> response = messageControllerDB.findBySender(sender);
+        ResponseEntity<List<Message>> response = messageControllerDB.getMessagesBySender(senderName);
 
         // Assert
-        verify(service, times(1)).getBySenderName(sender);
-        assertSame(HttpStatus.NOT_FOUND, response.getStatusCode());
+        verify(service, times(1)).getMessagesBySender(senderName);
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
         assertNull(response.getBody());
     }
 
-    //testFindBySenderWithError
-    // it will test the `findBySender` method when an error occurs during the database operation.
     @Test
-    void testFindBySenderWithError() {
+    void testGetMessagesBySenderWithError() {
         // Arrange
-        String sender = "testSender";
+        String senderName = "testSender";
 
-        when(service.getBySenderName(sender)).thenThrow(new RuntimeException("Database error"));
+        when(service.getMessagesBySender(senderName)).thenThrow(new RuntimeException("Database error"));
 
         // Act
-        ResponseEntity<List<Message>> response = messageControllerDB.findBySender(sender);
+        ResponseEntity<List<Message>> response = messageControllerDB.getMessagesBySender(senderName);
 
         // Assert
-        verify(service, times(1)).getBySenderName(sender);
-        assertSame(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+        verify(service, times(1)).getMessagesBySender(senderName);
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
         assertNull(response.getBody());
     }
 }

@@ -45,6 +45,7 @@ public class MessageControllerDB {
         }
     }
 
+    //http://localhost:8080/chat/room/messages
     @GetMapping("/messages")
     public ResponseEntity<List<Message>> getMessagesBySender(@RequestParam("sender") String senderName) {
         try {
