@@ -1,6 +1,14 @@
 package org.example;
 
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
@@ -13,13 +21,17 @@ class KafkaProducerConfigTest {
         // Create a Message object for testing
         Message testMessage = new Message();
 
-        // Create a mock KafkaProducerConfig
-        KafkaProducerConfig obj = mock(KafkaProducerConfig.class);
+        KafkaProducerConfig obj = new KafkaProducerConfig();
 
-        // Use Mockito to specify that sendMessage should throw an exception
-        when(obj.sendMessage(any(Message.class))).thenThrow(new RuntimeException("Test exception"));
+        // Wrap the code that might throw an exception in an assertThrows block
+        // This ensures that the exception is expected and handled in the test
+        assertDoesNotThrow(() -> {
+            // Call the sendMessage method and capture its response
+            String response = obj.sendMessage(testMessage);
 
-        // Now, call the sendMessage method, which will throw the exception we specified
-        assertThrows(RuntimeException.class, () -> obj.sendMessage(testMessage));
+            // Add assertions to verify the response
+            // For example, check if the response contains a success message
+            assertTrue(response.contains("Sent"));
+        });
     }
 }
