@@ -10,6 +10,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.kafka.core.KafkaTemplate;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -59,7 +61,7 @@ class MessageServiceDBTest {
         expectedMessage.setId(2L);
         expectedMessage.setBody("Hi there!");
         expectedMessage.setSender(senderName);
-        when(messageRepository.findBySender(senderName)).thenReturn(expectedMessage);
+        when(messageRepository.findBySender(senderName)).thenReturn((List<Message>) expectedMessage);
 
         Message retrievedMessage = messageServiceDB.getBySenderName(senderName);
 

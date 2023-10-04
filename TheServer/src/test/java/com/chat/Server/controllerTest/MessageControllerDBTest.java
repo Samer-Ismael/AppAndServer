@@ -11,6 +11,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import java.util.List;
+
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -146,7 +149,7 @@ class MessageControllerDBTest {
         when(service.getBySenderName(sender)).thenReturn(expectedMessage);
 
         // Act
-        ResponseEntity<Message> response = messageControllerDB.findBySender(sender);
+        ResponseEntity<List<Message>> response = messageControllerDB.findBySender(sender);
 
         // Assert
         verify(service, times(1)).getBySenderName(sender);
@@ -164,7 +167,7 @@ class MessageControllerDBTest {
         when(service.getBySenderName(sender)).thenReturn(null);
 
         // Act
-        ResponseEntity<Message> response = messageControllerDB.findBySender(sender);
+        ResponseEntity<List<Message>> response = messageControllerDB.findBySender(sender);
 
         // Assert
         verify(service, times(1)).getBySenderName(sender);
@@ -182,7 +185,7 @@ class MessageControllerDBTest {
         when(service.getBySenderName(sender)).thenThrow(new RuntimeException("Database error"));
 
         // Act
-        ResponseEntity<Message> response = messageControllerDB.findBySender(sender);
+        ResponseEntity<List<Message>> response = messageControllerDB.findBySender(sender);
 
         // Assert
         verify(service, times(1)).getBySenderName(sender);

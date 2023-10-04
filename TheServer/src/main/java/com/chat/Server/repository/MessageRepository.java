@@ -6,6 +6,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 //The `MessageRepository` interface defines methods for accessing and manipulating message data
@@ -16,26 +17,5 @@ import java.util.Optional;
 //wrap the database queries in try-catch blocks to handle database-related exceptions.
 @Repository
 public interface MessageRepository extends JpaRepository<Message, Long> {
-    Message findBySender(String sender);
-    Message findByReceiver(String receiver);
 
-    default Message safeFindBySender(String sender) {
-        try {
-            return findBySender(sender);
-        } catch (DataAccessException e) {
-            // Handle database-related exceptions
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    default Message safeFindByReceiver(String receiver) {
-        try {
-            return findByReceiver(receiver);
-        } catch (DataAccessException e) {
-            // Handle database-related exceptions
-            e.printStackTrace();
-            return null;
-        }
-    }
 }

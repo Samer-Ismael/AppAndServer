@@ -35,25 +35,6 @@ public class MessageServiceDB {
         }
     }
 
-    public Message getBySenderName(String sender) {
-        try {
-            return repository.findBySender(sender);
-        } catch (Exception e) {
-            // Handle database errors
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public Message getByReceiverName(String receiver) {
-        try {
-            return repository.findBySender(receiver);
-        } catch (Exception e) {
-            // Handle database errors
-            e.printStackTrace();
-            return null;
-        }
-    }
     public void deleteAllMessages() {
         try {
             repository.deleteAll();

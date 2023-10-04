@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 //The MessageControllerDB class is a RESTful API controller for handling chat room messages
 //with database storage. It has HTTP endpoints for sending, retrieving messages by sender,
 //and retrieving messages by receiver.
@@ -27,8 +29,6 @@ public class MessageControllerDB {
     public MessageControllerDB(MessageServiceDB service, MessageProducer producer) {
         this.service = service;
         this.producer = producer;
-
-
     }
 
     //saveMessage receives POST requests to send messages, produces Kafka messages,
@@ -44,37 +44,4 @@ public class MessageControllerDB {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
-    //findByReceiver receives GET requests to retrieve messages by receiver name.
-    @GetMapping("/receiver")
-    public ResponseEntity<Message> findByReceiver(@RequestParam String receiver) {
-        try {
-            Message message = service.getByReceiverName(receiver);
-            if (message != null) {
-                return ResponseEntity.ok(message);
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-        } catch (Exception e) {
-            // Log the exception
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
-
-    //findBySender receives GET requests to retrieve messages by sender name.
-    @GetMapping("/sender")
-    public ResponseEntity<Message> findBySender(@RequestParam String sender) {
-        try {
-            Message message = service.getBySenderName(sender);
-            if (message != null) {
-                return ResponseEntity.ok(message);
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-        } catch (Exception e) {
-            // Log the exception
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
-
 }
