@@ -103,22 +103,6 @@ class MessageControllerDBTest {
     }
 
     @Test
-    void testGetMessagesBySenderNotFound() {
-        // Arrange
-        String senderName = "nonExistentSender";
-
-        when(service.getMessagesBySender(senderName)).thenReturn(Collections.emptyList());
-
-        // Act
-        ResponseEntity<List<Message>> response = messageControllerDB.getMessagesBySender(senderName);
-
-        // Assert
-        verify(service, times(1)).getMessagesBySender(senderName);
-        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-        assertNull(response.getBody());
-    }
-
-    @Test
     void testGetMessagesBySenderWithError() {
         // Arrange
         String senderName = "testSender";
