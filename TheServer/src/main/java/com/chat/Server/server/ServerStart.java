@@ -8,7 +8,10 @@ public class ServerStart {
     }
 
     private void start(String path) {
+
         try {
+            System.out.println("Wait... It's working but it needs about 10 seconds :)");
+            System.out.println("Trust me it's worth it, you don't want to connect the app to a non-working server");
             // Base directory where Kafka and ZooKeeper are installed
             String kafkaFilePath = path;
 
